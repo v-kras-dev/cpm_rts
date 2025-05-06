@@ -351,7 +351,11 @@
 	</totalField>
 	<totalField>
 		<dataPath>ОтклонениеПроцент</dataPath>
-		<expression>Сумма(ОтклонениеПроцент)</expression>
+		<expression>ВЫБОР 
+КОГДА СУММА(Сумма) &lt;&gt; 0 
+ТОГДА 100 * (СУММА(СуммаОтклонение) / СУММА(Сумма))
+ИНАЧЕ 0
+КОНЕЦ</expression>
 	</totalField>
 	<parameter>
 		<name>НачПер</name>
@@ -660,15 +664,15 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МинимальнаяШирина</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">13.125</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">15.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МаксимальнаяШирина</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">13.125</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">15.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МинимальнаяВысота</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">75.75</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">86.25</dcscor:value>
 						</dcscor:item>
 					</dcsat:appearance>
 				</dcsat:tableCell>
@@ -707,15 +711,15 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МинимальнаяШирина</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">13.125</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">15.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МаксимальнаяШирина</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">13.125</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">15.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МинимальнаяВысота</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">75.75</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">87.75</dcscor:value>
 						</dcscor:item>
 					</dcsat:appearance>
 				</dcsat:tableCell>
@@ -754,15 +758,15 @@
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МинимальнаяШирина</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">13.125</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">15.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МаксимальнаяШирина</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">13.125</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">15.25</dcscor:value>
 						</dcscor:item>
 						<dcscor:item>
 							<dcscor:parameter>МинимальнаяВысота</dcscor:parameter>
-							<dcscor:value xsi:type="xs:decimal">75.75</dcscor:value>
+							<dcscor:value xsi:type="xs:decimal">87</dcscor:value>
 						</dcscor:item>
 					</dcsat:appearance>
 				</dcsat:tableCell>
@@ -2261,11 +2265,36 @@
 							<dcsset:field>ОтклонениеПроцент</dcsset:field>
 						</dcsset:item>
 					</dcsset:selection>
+					<dcsset:conditionalAppearance>
+						<dcsset:item>
+							<dcsset:selection>
+								<dcsset:item>
+									<dcsset:field>ОтклонениеПроцент</dcsset:field>
+								</dcsset:item>
+							</dcsset:selection>
+							<dcsset:filter/>
+							<dcsset:appearance>
+								<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+									<dcscor:parameter>Формат</dcscor:parameter>
+									<dcscor:value xsi:type="v8:LocalStringType">
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>ЧЦ=15; ЧДЦ=2</v8:content>
+										</v8:item>
+									</dcscor:value>
+								</dcscor:item>
+							</dcsset:appearance>
+						</dcsset:item>
+					</dcsset:conditionalAppearance>
 					<dcsset:outputParameters>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
-							<dcscor:use>false</dcscor:use>
 							<dcscor:parameter>РасположениеПолейГруппировки</dcscor:parameter>
-							<dcscor:value xsi:type="dcsset:DataCompositionGroupFieldsPlacement">Separately</dcscor:value>
+							<dcscor:value xsi:type="dcsset:DataCompositionGroupFieldsPlacement">Together</dcscor:value>
+						</dcscor:item>
+						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+							<dcscor:use>false</dcscor:use>
+							<dcscor:parameter>РасположениеРеквизитов</dcscor:parameter>
+							<dcscor:value xsi:type="dcsset:DataCompositionAttributesPlacement">Together</dcscor:value>
 						</dcscor:item>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 							<dcscor:parameter>РасположениеОбщихИтогов</dcscor:parameter>
@@ -2308,11 +2337,32 @@
 								<dcsset:field>ОтклонениеПроцент</dcsset:field>
 							</dcsset:item>
 						</dcsset:selection>
+						<dcsset:conditionalAppearance>
+							<dcsset:item>
+								<dcsset:selection>
+									<dcsset:item>
+										<dcsset:field>ОтклонениеПроцент</dcsset:field>
+									</dcsset:item>
+								</dcsset:selection>
+								<dcsset:filter/>
+								<dcsset:appearance>
+									<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+										<dcscor:parameter>Формат</dcscor:parameter>
+										<dcscor:value xsi:type="v8:LocalStringType">
+											<v8:item>
+												<v8:lang>ru</v8:lang>
+												<v8:content>ЧЦ=15; ЧДЦ=2</v8:content>
+											</v8:item>
+										</dcscor:value>
+									</dcscor:item>
+								</dcsset:appearance>
+							</dcsset:item>
+						</dcsset:conditionalAppearance>
 						<dcsset:outputParameters>
 							<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 								<dcscor:use>false</dcscor:use>
-								<dcscor:parameter>РасположениеПолейГруппировки</dcscor:parameter>
-								<dcscor:value xsi:type="dcsset:DataCompositionGroupFieldsPlacement">Separately</dcscor:value>
+								<dcscor:parameter>РасположениеРеквизитов</dcscor:parameter>
+								<dcscor:value xsi:type="dcsset:DataCompositionAttributesPlacement">Together</dcscor:value>
 							</dcscor:item>
 						</dcsset:outputParameters>
 					</dcsset:item>
@@ -2371,6 +2421,27 @@
 							<dcsset:field>ОтклонениеПроцент</dcsset:field>
 						</dcsset:item>
 					</dcsset:selection>
+					<dcsset:conditionalAppearance>
+						<dcsset:item>
+							<dcsset:selection>
+								<dcsset:item>
+									<dcsset:field>ОтклонениеПроцент</dcsset:field>
+								</dcsset:item>
+							</dcsset:selection>
+							<dcsset:filter/>
+							<dcsset:appearance>
+								<dcscor:item xsi:type="dcsset:SettingsParameterValue">
+									<dcscor:parameter>Формат</dcscor:parameter>
+									<dcscor:value xsi:type="v8:LocalStringType">
+										<v8:item>
+											<v8:lang>ru</v8:lang>
+											<v8:content>ЧЦ=15; ЧДЦ=2</v8:content>
+										</v8:item>
+									</dcscor:value>
+								</dcscor:item>
+							</dcsset:appearance>
+						</dcsset:item>
+					</dcsset:conditionalAppearance>
 					<dcsset:outputParameters>
 						<dcscor:item xsi:type="dcsset:SettingsParameterValue">
 							<dcscor:parameter>РасположениеГруппировки</dcscor:parameter>
